@@ -34,6 +34,6 @@ a {
 
 #resume {
   display: flex;
-  flex-direction: column;a
+  flex-direction: column;
   gap: 20px;
 }
