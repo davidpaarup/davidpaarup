@@ -11,6 +11,10 @@ body {
   #profileBasicInfo {
     text-align: center;
   }
+
+  body {
+    padding: 2rem;
+  }
 }
 
 img {
