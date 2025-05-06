@@ -39,3 +39,21 @@ a {
   flex-direction: column;
   gap: 20px;
 }
+
+.flex {
+  display: flex;
+  gap: 15px
+}
+
+.column {
+  flex-direction: column;
+  width: 33%;
+}
+
+.drawing {
+  width: 100%;
+}
+
+.drawingLink:hover {
+  opacity: 0.9;
+}
