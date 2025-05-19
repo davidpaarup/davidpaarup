@@ -4,12 +4,20 @@ async function getData() {
     return data.blobs.map(b => b.url);
 }
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 async function displayDrawings() {
     const urls = await getData();
+    const shuffledUrls = shuffleArray([...urls]);
     const containers = document.getElementsByClassName('drawingContainer');
-    console.log(containers);
     
-    urls.forEach((url, i) => {
+    shuffledUrls.forEach((url, i) => {
         const a = document.createElement('a');
         a.href = url;
         a.className = 'drawingLink';
