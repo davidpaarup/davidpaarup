@@ -25,6 +25,7 @@ async function displayDrawings() {
         const img = document.createElement('img');
         img.src = url;
         img.className = 'drawing';
+        img.loading = 'lazy';
         
         a.appendChild(img);
         containers[i % containers.length].appendChild(a);
