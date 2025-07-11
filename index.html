@@ -11,56 +11,43 @@
 
     <div id="profileBasicInfo">
         <img src="profile.png" />
-        <h1>David Paarup</h1>
+        <h1 id="name"></h1> 
+          <img src="english.png" class="language-icon"/> 
+          <img src="spanish.png" class="language-icon"/>
+          <img src="danish.png" class="language-icon"/>
+          <img src="norwegian.png" class="language-icon"/>
       </div>
     
       <hr />
     
-      <p>Software engineer with a sense for detail, quality and team work. Always striving to learn.</p>
+      <p id="description"></p>
     
       <hr />
     
       <div id="resume">
         <div>
-    
-          <p><b>Experience</b></p>
-          <p>- <span>Full stack developer - <a href="https://letsreg.com">LetsReg</a> - Oslo; 2022 - now: Design and
-              development of the web application and services using Angular, .Net, MSSQL, Kubernetes and Azure.</span></p>
-          <p>- <span>Software engineer - <a href="https://danskebank.dk">Danske Bank</a> - Copenhagen; 2019 - 2022: Design
-              and
-              development of a sustainability related web application and services using Angular, .Net and MSSQL.</span></p>
-          <p>- <span>Software engineer - <a href="https://www.iic.uam.es">IIC</a> (Part-time) - Madrid; 2018 - 2019:
-              Modularisation of large Bash scripts using Python, converting them to micro-services orchestrated by
-              Kubernetes.</span></p>
-          <p>- <span>Software developer - <a href="https://www.flexxible.com">Flexxible</a> (Internship) - Madrid; 2018:
-              Automation of virtual machine configuration and deployment using Chef and VMware.</span></p>
+          <p><b id="experienceTitle"></b></p>
+          <div id="experience"></div>
         </div>
     
         <div>
-    
-          <p><b>Education</b></p>
-          <p>- <span>Computer science - <a href="https://www.uam.es">UAM</a> (Bachelor) - Madrid; 2015 - 2019: General
-              hardware and software knowledge.</span></p>
-    
+          <p><b id="educationTitle"></b></p>
+          <div id="education"></div>
         </div>
 
         <div>
-    
-          <p><b>Projects</b></p>
-          <p>- <span>Website development - <a href="https://alexlomart.com">Alex Lomart</a> - Madrid; 2019:
-            Photography portfolio using Wordpress.</span></p>
-          <p>- <span><a href="drawings.html">Drawings</a> I do for fun.</span></p>
-    
+          <p><b id="projectsTitle"></b></p>
+          <div id="projects"></div>
         </div>
     
         <div>
-          <p><b>Skills</b></p>
-          <p>.Net, Angular, SQL, Azure and Kubernetes.</p>
+          <p><b id="skillsTitle"></b></p>
+          <p id="skills"></p>
         </div>
     
         <div>
-          <p><b>Languages</b></p>
-          <p>Spanish, English and Danish.</p>
+          <p><b id="languagesTitle"></b></p>
+          <p id="languages"></p>
         </div>
     
       </div>
@@ -68,11 +55,12 @@
       <hr />
     
       <div>
-        <p>Contact: <a href="mailto:hi@davidpaarup.com">hi@davidpaarup.com</a></p>
-        <p>Location: Oslo</p>
-        <p>Birth date: 24-12-1992</p>
+        <p><span id="contactTitle"></span>: <a id="email"></a></p>
+        <p><span id="locationTitle"></span>: <span id="location"></span></p>
+        <p><span id="birthDateTitle"></span>: <span id="birthDate"></span></p>
       </div>
 
+    <script src="profile.js"></script>
 </body>
 
 </html>

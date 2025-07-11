@@ -57,3 +57,14 @@ a {
 .drawingLink:hover {
   opacity: 0.9;
 }
+
+.language-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.language-icon:hover {
+  opacity: 0.7;
+}
