@@ -12,14 +12,17 @@ function shuffleArray(array) {
     return array;
 }
 
+let imageObserver;
+let containers;
+
 async function displayDrawings() {
     const urls = await getData();
     const shuffledUrls = shuffleArray([...urls]);
-    const containers = document.getElementsByClassName('drawingContainer');
+    containers = document.getElementsByClassName('drawingContainer');
     
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+    imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            
+
             if (!entry.isIntersecting) {
                 return;
             }
@@ -30,7 +33,18 @@ async function displayDrawings() {
         });
     });
     
-    shuffledUrls.forEach((url, i) => {
+
+    const firstImages = shuffledUrls.slice(0, 10);
+    observe(firstImages);
+
+    setTimeout(() => {
+        const restImages = shuffledUrls.slice(10);
+        observe(restImages);
+    }, 1000);
+}
+
+function observe(urls) {
+   urls.forEach((url, i) => {
         const a = document.createElement('a');
         a.href = url;
         a.className = 'drawingLink';
