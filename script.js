@@ -17,18 +17,31 @@ async function displayDrawings() {
     const shuffledUrls = shuffleArray([...urls]);
     const containers = document.getElementsByClassName('drawingContainer');
     
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            const img = entry.target;
+            img.src = img.dataset.src;
+            observer.unobserve(img);
+        });
+    });
+    
     shuffledUrls.forEach((url, i) => {
         const a = document.createElement('a');
         a.href = url;
         a.className = 'drawingLink';
 
         const img = document.createElement('img');
-        img.src = url;
+        img.dataset.src = url;
         img.className = 'drawing';
-        img.loading = 'lazy';
         
         a.appendChild(img);
         containers[i % containers.length].appendChild(a);
+        imageObserver.observe(img);
     });
 }
 
