@@ -111,8 +111,12 @@ function populateContent(language) {
     languagesTitle.textContent = data.languages.sectionTitle;
 
     const joinedLanguages = getJoined(data.languages.data);
-    const caseHandledLanguages = joinedLanguages.charAt(0).toUpperCase() + joinedLanguages.slice(1).toLowerCase();;
-    document.getElementById('languages').textContent = caseHandledLanguages;
+
+    if (!data.languages.capitalize) {
+        joinedLanguages = joinedLanguages.charAt(0).toUpperCase() + joinedLanguages.slice(1).toLowerCase();
+    }
+
+    document.getElementById('languages').textContent = joinedLanguages;
     
     // Update contact info
     const contactTitle = document.getElementById('contactTitle');
