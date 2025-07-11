@@ -1,5 +1,5 @@
 async function getData() {
-    var result = await fetch('https://image-api-david-paarup.vercel.app/api/list');
+    var result = await fetch('https://davidpaarup-api.vercel.app/api/list');
     const data = await result.json();
     return data.blobs.map(b => b.url);
 }

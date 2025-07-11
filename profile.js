@@ -5,7 +5,7 @@ let currentLanguage = 'english';
 // Load data from data.json
 async function loadProfileData() {
     try {
-        const response = await fetch('https://image-api-david-paarup.vercel.app/api/data');
+        const response = await fetch('https://davidpaarup-api.vercel.app/api/data');
         profileData = await response.json();
         populateContent(currentLanguage);
         setupLanguageSwitchers();
