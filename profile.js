@@ -110,7 +110,7 @@ function populateContent(language) {
     const languagesTitle = document.getElementById('languagesTitle');
     languagesTitle.textContent = data.languages.sectionTitle;
 
-    const joinedLanguages = getJoined(data.languages.data);
+    let joinedLanguages = getJoined(data.languages.data);
 
     if (!data.languages.capitalize) {
         joinedLanguages = joinedLanguages.charAt(0).toUpperCase() + joinedLanguages.slice(1).toLowerCase();
