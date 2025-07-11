@@ -16,10 +16,10 @@ async function loadProfileData() {
 
 // Setup language switcher event listeners
 function setupLanguageSwitchers() {
-    const englishIcon = document.querySelector('img[src="english.png"]');
-    const spanishIcon = document.querySelector('img[src="spanish.png"]');
-    const danishIcon = document.querySelector('img[src="danish.png"]');
-    const norwegianIcon = document.querySelector('img[src="norwegian.png"]');
+    const englishIcon = document.querySelector('img[src="icons/english.png"]');
+    const spanishIcon = document.querySelector('img[src="icons/spanish.png"]');
+    const danishIcon = document.querySelector('img[src="icons/danish.png"]');
+    const norwegianIcon = document.querySelector('img[src="icons/norwegian.png"]');
     
     if (englishIcon) {
         englishIcon.addEventListener('click', () => switchLanguage('english'));
