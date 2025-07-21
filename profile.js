@@ -2,15 +2,46 @@
 let profileData = null;
 let currentLanguage = 'english';
 
+// Hide <hr> and contactInfo while loading
+function setLoadingState(isLoading) {
+    const hrs = document.querySelectorAll('hr');
+    const contactInfo = document.getElementById('contactInfo');
+    const languageSwitchers = document.getElementById('languageSwitchers');
+    hrs.forEach(hr => {
+        if (isLoading) {
+            hr.classList.add('hidden');
+        } else {
+            hr.classList.remove('hidden');
+        }
+    });
+    if (contactInfo) {
+        if (isLoading) {
+            contactInfo.classList.add('hidden');
+        } else {
+            contactInfo.classList.remove('hidden');
+        }
+    }
+    if (languageSwitchers) {
+        if (isLoading) {
+            languageSwitchers.classList.add('hidden');
+        } else {
+            languageSwitchers.classList.remove('hidden');
+        }
+    }
+}
+
 // Load data from data.json
 async function loadProfileData() {
+    setLoadingState(true);
     try {
         const response = await fetch('https://davidpaarup-api.vercel.app/api/data');
         profileData = await response.json();
         populateContent(currentLanguage);
         setupLanguageSwitchers();
+        setLoadingState(false);
     } catch (error) {
         console.error('Error loading profile data:', error);
+        setLoadingState(false);
     }
 }
 
