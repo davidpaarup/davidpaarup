@@ -7,6 +7,7 @@ function setLoadingState(isLoading) {
     const hrs = document.querySelectorAll('hr');
     const contactInfo = document.getElementById('contactInfo');
     const languageSwitchers = document.getElementById('languageSwitchers');
+    const spinner = document.getElementById('spinner');
     hrs.forEach(hr => {
         if (isLoading) {
             hr.classList.add('hidden');
@@ -26,6 +27,13 @@ function setLoadingState(isLoading) {
             languageSwitchers.classList.add('hidden');
         } else {
             languageSwitchers.classList.remove('hidden');
+        }
+    }
+    if (spinner) {
+        if (isLoading) {
+            spinner.classList.remove('hidden');
+        } else {
+            spinner.classList.add('hidden');
         }
     }
 }
