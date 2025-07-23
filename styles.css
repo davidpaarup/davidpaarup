@@ -84,3 +84,11 @@ a {
 .hidden {
   display: none !important;
 }
+
+#socialMedia a {
+  transition: opacity 0.3s ease;
+}
+
+#socialMedia a:hover {
+  opacity: 0.5;
+}

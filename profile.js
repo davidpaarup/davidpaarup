@@ -7,6 +7,8 @@ function setLoadingState(isLoading) {
     const hrs = document.querySelectorAll('hr');
     const contactInfo = document.getElementById('contactInfo');
     const languageSwitchers = document.getElementById('languageSwitchers');
+    const socialMedia = document.getElementById('socialMedia');
+
     hrs.forEach(hr => {
         if (isLoading) {
             hr.classList.add('hidden');
@@ -14,6 +16,7 @@ function setLoadingState(isLoading) {
             hr.classList.remove('hidden');
         }
     });
+
     if (contactInfo) {
         if (isLoading) {
             contactInfo.classList.add('hidden');
@@ -21,6 +24,16 @@ function setLoadingState(isLoading) {
             contactInfo.classList.remove('hidden');
         }
     }
+
+    if (socialMedia) {
+
+        if (isLoading) {
+            socialMedia.classList.add('hidden');
+        } else {
+            socialMedia.classList.remove('hidden');
+        }
+    }
+
     if (languageSwitchers) {
         if (isLoading) {
             languageSwitchers.classList.add('hidden');
