@@ -157,24 +157,50 @@ function populateContent(language) {
     emailLink.href = `mailto:${data.email.text}`;
     emailLink.textContent = data.email.text;
 
-    // Remove any existing GitHub link
-    const oldGithubLink = document.getElementById('github-link');
-    if (oldGithubLink && oldGithubLink.parentNode) {
-        oldGithubLink.parentNode.remove();
-    }
-
-    // Add GitHub link below date of birth
+    // Add GitHub, Instagram, and LinkedIn links below date of birth
     const githubUsername = 'davidpaarup';
     const githubUrl = `https://github.com/${githubUsername}`;
+    const instagramUrl = 'https://www.instagram.com/davidpaarup/';
+    const linkedinUrl = 'https://www.linkedin.com/in/davidpaarup/';
     const contactInfoDiv = document.getElementById('contactInfo');
+
+    // Create a container for social links
+    const socialLinksDiv = document.createElement('span');
+    socialLinksDiv.style.display = 'inline-flex';
+    socialLinksDiv.style.gap = '8px';
+    socialLinksDiv.style.alignItems = 'center';
+
+    // GitHub link
     const githubLink = document.createElement('a');
     githubLink.id = 'github-link';
     githubLink.href = githubUrl;
     githubLink.target = '_blank';
     githubLink.rel = 'noopener noreferrer';
     githubLink.innerHTML = `<svg height="20" width="20" viewBox="0 0 16 16" fill="black" aria-hidden="true" style="vertical-align:middle;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>`;
+
+    // Instagram link
+    const instagramLink = document.createElement('a');
+    instagramLink.id = 'instagram-link';
+    instagramLink.href = instagramUrl;
+    instagramLink.target = '_blank';
+    instagramLink.rel = 'noopener noreferrer';
+    instagramLink.innerHTML = `<svg height="20" width="20" viewBox="0 0 448 512" fill="black" aria-hidden="true" style="vertical-align:middle;"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 186c-39.5 0-71.5-32-71.5-71.5s32-71.5 71.5-71.5 71.5 32 71.5 71.5-32 71.5-71.5 71.5zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-92.1S388.6 7.7 353.3 6C317.7 4.3 284.4 0 224 0S130.3 4.3 94.7 6C59.4 7.7 28 15.9 2.7 41.2S7.7 123.4 6 158.7C4.3 194.3 0 227.6 0 288s4.3 93.7 6 129.3c1.7 35.3 9.9 66.7 36.2 92.1s56.8 34.5 92.1 36.2C130.3 507.7 163.6 512 224 512s93.7-4.3 129.3-6c35.3-1.7 66.7-9.9 92.1-36.2s34.5-56.8 36.2-92.1c1.7-35.6 6-68.9 6-129.3s-4.3-93.7-6-129.3zM398.8 388c-7.8 19.6-22.9 34.7-42.5 42.5-29.4 11.7-99.2 9-132.3 9s-102.9 2.6-132.3-9c-19.6-7.8-34.7-22.9-42.5-42.5-11.7-29.4-9-99.2-9-132.3s-2.6-102.9 9-132.3c7.8-19.6 22.9-34.7 42.5-42.5C121.1 9 190.9 11.6 224 11.6s102.9-2.6 132.3 9c19.6 7.8 34.7 22.9 42.5 42.5 11.7 29.4 9 99.2 9 132.3s2.6 102.9-9 132.3z"/></svg>`;
+
+    // LinkedIn link
+    const linkedinLink = document.createElement('a');
+    linkedinLink.id = 'linkedin-link';
+    linkedinLink.href = linkedinUrl;
+    linkedinLink.target = '_blank';
+    linkedinLink.rel = 'noopener noreferrer';
+    linkedinLink.innerHTML = `<svg height="20" width="20" viewBox="0 0 448 512" fill="black" aria-hidden="true" style="vertical-align:middle;"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.7C24.09 107.3 0 83.2 0 53.6A53.6 53.6 0 0 1 53.6 0c29.6 0 53.6 24.09 53.6 53.6 0 29.6-24.09 53.7-53.6 53.7zM447.8 448h-92.4V302.4c0-34.7-12.4-58.4-43.3-58.4-23.6 0-37.6 15.9-43.7 31.3-2.3 5.6-2.8 13.4-2.8 21.2V448h-92.4s1.2-242.1 0-267.1h92.4v37.9c12.3-19 34.3-46.1 83.5-46.1 60.9 0 106.6 39.8 106.6 125.4V448z"/></svg>`;
+
+    // Add all links to the container
+    socialLinksDiv.appendChild(githubLink);
+    socialLinksDiv.appendChild(instagramLink);
+    socialLinksDiv.appendChild(linkedinLink);
+
     const githubPara = document.createElement('p');
-    githubPara.appendChild(githubLink);
+    githubPara.appendChild(socialLinksDiv);
     // Insert after the birth date paragraph
     const birthDatePara = contactInfoDiv.querySelector('p:nth-child(3)');
     if (birthDatePara && birthDatePara.nextSibling) {
