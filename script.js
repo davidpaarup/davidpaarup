@@ -79,12 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
     displayDrawings();
     
     const modal = document.getElementById('imageModal');
-    const closeBtn = document.querySelector('.close');
-    
-    closeBtn.addEventListener('click', closeModal);
     
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        if (e.target === modal || e.target.classList.contains('modal-content')) {
             closeModal();
         }
     });
