@@ -46,8 +46,12 @@ async function displayDrawings() {
 function observe(urls) {
    urls.forEach((url, i) => {
         const a = document.createElement('a');
-        a.href = url;
         a.className = 'drawingLink';
+        a.style.cursor = 'pointer';
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(url);
+        });
 
         const img = document.createElement('img');
         img.dataset.src = url;
@@ -59,4 +63,35 @@ function observe(urls) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', displayDrawings);
+function openModal(imageUrl) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = imageUrl;
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    displayDrawings();
+    
+    const modal = document.getElementById('imageModal');
+    const closeBtn = document.querySelector('.close');
+    
+    closeBtn.addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+});
