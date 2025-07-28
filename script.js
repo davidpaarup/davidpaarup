@@ -18,7 +18,7 @@ const menuTranslations = {
     }
 };
 
-let currentLanguage = localStorage.getItem('selectedLanguage') || 'english';
+let currentLanguage = sessionStorage.getItem('selectedLanguage') || 'english';
 
 // Update menu translations
 function updateMenuTranslations(language) {

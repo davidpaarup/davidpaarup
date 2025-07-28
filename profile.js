@@ -1,6 +1,6 @@
 // Global variable to store the loaded data
 let profileData = null;
-let currentLanguage = localStorage.getItem('selectedLanguage') || 'english';
+let currentLanguage = sessionStorage.getItem('selectedLanguage') || 'english';
 
 // Menu translations
 const menuTranslations = {
@@ -243,7 +243,7 @@ function getJoined(elements) {
 // Function to switch language
 function switchLanguage(language) {
     currentLanguage = language;
-    localStorage.setItem('selectedLanguage', language);
+    sessionStorage.setItem('selectedLanguage', language);
     populateContent(language);
     
     // Remove active class from all language icons
