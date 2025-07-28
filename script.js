@@ -67,7 +67,7 @@ function openModal(imageUrl) {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     modalImage.src = imageUrl;
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
 }
 
 function closeModal() {
