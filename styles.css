@@ -83,7 +83,10 @@ a {
 
 .flex {
   display: flex;
-  gap: 15px
+}
+
+.drawingFlex {
+  gap: 1rem;
 }
 
 .column {
