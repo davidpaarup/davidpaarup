@@ -58,7 +58,7 @@ body {
   }
 
   .drawingFlex {
-    gap: .5rem;
+    gap: .5rem !important;
   }
 }
 
