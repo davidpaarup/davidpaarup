@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  padding: 9rem 5rem 5rem 5rem;
+  padding: 8rem 5rem 5rem 5rem;
   background-color: rgb(250, 249, 245);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -49,7 +49,7 @@ body {
   }
 
   body {
-    padding: 9rem 2rem 2rem 2rem;
+    padding: 8rem 2rem 2rem 2rem;
   }
 
   #topMenu {
