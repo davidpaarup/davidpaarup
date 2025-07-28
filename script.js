@@ -1,3 +1,43 @@
+// Menu translations
+const menuTranslations = {
+    'english': {
+        'resume': 'Resumé',
+        'drawings': 'Drawings'
+    },
+    'spanish': {
+        'resume': 'Currículum',
+        'drawings': 'Dibujos'
+    },
+    'danish': {
+        'resume': 'CV',
+        'drawings': 'Tegninger'
+    },
+    'norwegian': {
+        'resume': 'CV',
+        'drawings': 'Tegninger'
+    }
+};
+
+let currentLanguage = localStorage.getItem('selectedLanguage') || 'english';
+
+// Update menu translations
+function updateMenuTranslations(language) {
+    const translations = menuTranslations[language];
+    if (!translations) return;
+    
+    // Update menu links
+    const resumeLink = document.querySelector('a[href="index.html"]');
+    const drawingsLink = document.querySelector('a[href="drawings.html"]');
+    
+    if (resumeLink) {
+        resumeLink.textContent = translations.resume;
+    }
+    
+    if (drawingsLink) {
+        drawingsLink.textContent = translations.drawings;
+    }
+}
+
 async function getData() {
     var result = await fetch('https://davidpaarup-api.vercel.app/api/list');
     const data = await result.json();
@@ -76,6 +116,9 @@ function closeModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Apply saved language translation on page load
+    updateMenuTranslations(currentLanguage);
+    
     displayDrawings();
     
     const modal = document.getElementById('imageModal');

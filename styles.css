@@ -22,8 +22,13 @@ body {
   padding: 1rem 2rem;
   z-index: 100;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
   gap: 2rem;
+}
+
+.nav-links {
+  display: flex;
 }
 
 #topMenu a {
@@ -49,12 +54,14 @@ body {
   }
 
   body {
-    padding: 7rem 2rem 2rem 2rem;
+    padding: 9rem 2rem 2rem 2rem;
   }
 
   #topMenu {
     padding: 1rem;
     gap: 1rem;
+    flex-direction: column;
+    align-items: center;
   }
 
   .drawingFlex {

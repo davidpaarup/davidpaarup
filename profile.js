@@ -1,12 +1,31 @@
 // Global variable to store the loaded data
 let profileData = null;
-let currentLanguage = 'english';
+let currentLanguage = localStorage.getItem('selectedLanguage') || 'english';
+
+// Menu translations
+const menuTranslations = {
+    'english': {
+        'resume': 'Resumé',
+        'drawings': 'Drawings'
+    },
+    'spanish': {
+        'resume': 'Currículum',
+        'drawings': 'Dibujos'
+    },
+    'danish': {
+        'resume': 'CV',
+        'drawings': 'Tegninger'
+    },
+    'norwegian': {
+        'resume': 'CV',
+        'drawings': 'Tegninger'
+    }
+};
 
 // Hide <hr> and contactInfo while loading
 function setLoadingState(isLoading) {
     const hrs = document.querySelectorAll('hr');
     const contactInfo = document.getElementById('contactInfo');
-    const languageSwitchers = document.getElementById('languageSwitchers');
     const socialMedia = document.getElementById('socialMedia');
 
     hrs.forEach(hr => {
@@ -33,14 +52,6 @@ function setLoadingState(isLoading) {
             socialMedia.classList.remove('hidden');
         }
     }
-
-    if (languageSwitchers) {
-        if (isLoading) {
-            languageSwitchers.classList.add('hidden');
-        } else {
-            languageSwitchers.classList.remove('hidden');
-        }
-    }
 }
 
 // Load data from data.json
@@ -65,6 +76,15 @@ function setupLanguageSwitchers() {
     const danishIcon = document.querySelector('img[src="icons/danish.png"]');
     const norwegianIcon = document.querySelector('img[src="icons/norwegian.png"]');
     
+    // Set correct active icon based on current language
+    const allLanguageIcons = document.querySelectorAll('.language-icon');
+    allLanguageIcons.forEach(icon => icon.classList.remove('active'));
+    
+    const activeIcon = document.querySelector(`img[src="icons/${currentLanguage}.png"]`);
+    if (activeIcon) {
+        activeIcon.classList.add('active');
+    }
+    
     if (englishIcon) {
         englishIcon.addEventListener('click', () => switchLanguage('english'));
     }
@@ -82,12 +102,33 @@ function setupLanguageSwitchers() {
     }
 }
 
+// Update menu translations
+function updateMenuTranslations(language) {
+    const translations = menuTranslations[language];
+    if (!translations) return;
+    
+    // Update menu links
+    const resumeLink = document.querySelector('a[href="index.html"]');
+    const drawingsLink = document.querySelector('a[href="drawings.html"]');
+    
+    if (resumeLink) {
+        resumeLink.textContent = translations.resume;
+    }
+    
+    if (drawingsLink) {
+        drawingsLink.textContent = translations.drawings;
+    }
+}
+
 // Populate HTML content with data
 function populateContent(language) {
     if (!profileData) return;
     
     const data = profileData.find(item => item.language === language)?.data;
     if (!data) return;
+    
+    // Update menu translations
+    updateMenuTranslations(language);
     
     // Update basic info
     document.getElementById('name').textContent = data.name.text;
@@ -202,6 +243,7 @@ function getJoined(elements) {
 // Function to switch language
 function switchLanguage(language) {
     currentLanguage = language;
+    localStorage.setItem('selectedLanguage', language);
     populateContent(language);
     
     // Remove active class from all language icons
