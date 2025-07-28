@@ -123,6 +123,10 @@ hr {
   margin-bottom: 50px;
 } 
 
+a:hover {
+  text-decoration: underline;
+}
+
 a {
   text-decoration: none;
   color: rgb(203, 120, 93);
