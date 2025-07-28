@@ -22,11 +22,12 @@ const menuTranslations = {
     }
 };
 
-// Hide <hr> and contactInfo while loading
+// Hide elements while loading
 function setLoadingState(isLoading) {
     const hrs = document.querySelectorAll('hr');
     const contactInfo = document.getElementById('contactInfo');
     const socialMedia = document.getElementById('socialMedia');
+    const navLinks = document.querySelector('.nav-links');
 
     hrs.forEach(hr => {
         if (isLoading) {
@@ -45,13 +46,23 @@ function setLoadingState(isLoading) {
     }
 
     if (socialMedia) {
-
         if (isLoading) {
             socialMedia.classList.add('hidden');
         } else {
             socialMedia.classList.remove('hidden');
         }
     }
+
+    if (navLinks) {
+        if (isLoading) {
+            navLinks.classList.add('nav-hidden');
+        } else {
+            navLinks.classList.remove('nav-hidden');
+        }
+    }
+
+    // Language switchers should remain visible during loading
+    // so users can change language while content is loading
 }
 
 // Load data from data.json

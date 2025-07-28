@@ -19,10 +19,16 @@ body {
   background-color: rgba(227, 218, 204, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 1rem 2rem;
+  padding: 1rem 5rem;
   z-index: 100;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu-right {
+  display: flex;
   align-items: center;
   gap: 2rem;
 }
@@ -34,7 +40,7 @@ body {
 #topMenu a {
   text-decoration: none;
   color: gray;
-  font-weight: 500;
+  font-weight: initial;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: color 0.3s ease, opacity 0.3s ease;
@@ -58,7 +64,7 @@ body {
   }
 
   #topMenu {
-    padding: 1rem;
+    padding: 1rem 2rem;
     gap: 1rem;
     flex-direction: column;
     align-items: center;
@@ -153,6 +159,10 @@ a {
   display: none !important;
 }
 
+.nav-hidden {
+  visibility: hidden;
+}
+
 #socialMedia a {
   transition: opacity 0.3s ease;
 }
@@ -213,3 +223,8 @@ a {
   }
 }
 
+#name {
+  font-weight: 300;
+  margin: 0;
+  font-size: 1.5rem;
+}

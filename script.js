@@ -19,6 +19,49 @@ const menuTranslations = {
 };
 
 let currentLanguage = sessionStorage.getItem('selectedLanguage') || 'english';
+let profileData = null;
+
+// Load profile data from API
+async function loadProfileData() {
+    try {
+        const response = await fetch('https://davidpaarup-api.vercel.app/api/data');
+        profileData = await response.json();
+        updateContent(currentLanguage);
+    } catch (error) {
+        console.error('Error loading profile data:', error);
+    }
+}
+
+// Update content based on language
+function updateContent(language) {
+    if (!profileData) return;
+    
+    const data = profileData.find(item => item.language === language)?.data;
+    if (!data) return;
+    
+    // Update name
+    const nameElement = document.getElementById('name');
+    if (nameElement) {
+        nameElement.textContent = data.name.text;
+    }
+    
+    // Update menu translations
+    updateMenuTranslations(language);
+    
+    // Show menu items now that language is resolved
+    showMenuItems();
+}
+
+// Show menu items after language resolution
+function showMenuItems() {
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (navLinks) {
+        navLinks.classList.remove('nav-hidden');
+    }
+    
+    // Language switchers are always visible, no need to show/hide them
+}
 
 // Update menu translations
 function updateMenuTranslations(language) {
@@ -41,8 +84,8 @@ function updateMenuTranslations(language) {
 // Function to switch language
 function switchLanguage(language) {
     currentLanguage = language;
-    localStorage.setItem('selectedLanguage', language);
-    updateMenuTranslations(language);
+    sessionStorage.setItem('selectedLanguage', language);
+    updateContent(language);
     
     // Remove active class from all language icons
     const allLanguageIcons = document.querySelectorAll('.language-icon');
@@ -166,8 +209,8 @@ function closeModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Apply saved language translation on page load
-    updateMenuTranslations(currentLanguage);
+    // Load profile data and apply translations
+    loadProfileData();
     
     // Setup language switcher functionality
     setupLanguageSwitchers();
