@@ -268,5 +268,30 @@ function switchLanguage(language) {
     }
 }
 
+// Mobile menu toggle functionality
+function setupMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const menuRight = document.getElementById('menuRight');
+    
+    if (mobileMenuToggle && menuRight) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            menuRight.classList.toggle('expanded');
+        });
+        
+        // Close menu when clicking on a navigation link
+        const navLinks = menuRight.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                menuRight.classList.remove('expanded');
+            });
+        });
+    }
+}
+
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', loadProfileData); 
+document.addEventListener('DOMContentLoaded', () => {
+    loadProfileData();
+    setupMobileMenu();
+}); 

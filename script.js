@@ -208,12 +208,37 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
+// Mobile menu toggle functionality
+function setupMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const menuRight = document.getElementById('menuRight');
+    
+    if (mobileMenuToggle && menuRight) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            menuRight.classList.toggle('expanded');
+        });
+        
+        // Close menu when clicking on a navigation link
+        const navLinks = menuRight.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                menuRight.classList.remove('expanded');
+            });
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Load profile data and apply translations
     loadProfileData();
     
     // Setup language switcher functionality
     setupLanguageSwitchers();
+    
+    // Setup mobile menu functionality
+    setupMobileMenu();
     
     displayDrawings();
     
