@@ -60,6 +60,14 @@ body {
   .drawingFlex {
     gap: .5rem !important;
   }
+
+  .drawingContainer:nth-child(3) {
+    display: none;
+  }
+
+  .column {
+    width: 50% !important;
+  }
 }
 
 img {
