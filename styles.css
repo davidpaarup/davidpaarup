@@ -56,6 +56,10 @@ body {
     padding: 1rem;
     gap: 1rem;
   }
+
+  .drawingFlex {
+    gap: .5rem;
+  }
 }
 
 img {
