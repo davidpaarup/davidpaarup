@@ -1,10 +1,44 @@
+html {
+  overflow-y: scroll;
+}
+
 body {
-  padding: 5rem;
-  background-color: ghostwhite;
+  padding: 7rem 5rem 5rem 5rem;
+  background-color: rgb(250, 249, 245);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+}
+
+#topMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(227, 218, 204);
+  padding: 1rem 2rem;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#topMenu a {
+  text-decoration: none;
+  color: gray;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+#topMenu a:hover {
+  opacity: 0.5;
+}
+
+#topMenu a.active {
+  color: rgb(203, 120, 93);
 }
 
 @media only screen and (max-width: 600px) {
@@ -13,7 +47,12 @@ body {
   }
 
   body {
-    padding: 2rem;
+    padding: 5rem 2rem 2rem 2rem;
+  }
+
+  #topMenu {
+    padding: 1rem;
+    gap: 1rem;
   }
 }
 
@@ -62,11 +101,16 @@ a {
   width: 25px;
   height: 25px;
   cursor: pointer;
+  opacity: 0.5;
   transition: opacity 0.3s ease;
 }
 
 .language-icon:hover {
   opacity: 0.7;
+}
+
+.language-icon.active {
+  opacity: 1;
 }
 
 #languageSwitchers {

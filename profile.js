@@ -203,6 +203,16 @@ function getJoined(elements) {
 function switchLanguage(language) {
     currentLanguage = language;
     populateContent(language);
+    
+    // Remove active class from all language icons
+    const allLanguageIcons = document.querySelectorAll('.language-icon');
+    allLanguageIcons.forEach(icon => icon.classList.remove('active'));
+    
+    // Add active class to the clicked language icon
+    const activeIcon = document.querySelector(`img[src="icons/${language}.png"]`);
+    if (activeIcon) {
+        activeIcon.classList.add('active');
+    }
 }
 
 // Initialize when DOM is loaded
