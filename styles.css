@@ -16,7 +16,9 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgb(227, 218, 204);
+  background-color: rgba(227, 218, 204, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 1rem 2rem;
   z-index: 100;
   display: flex;
