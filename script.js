@@ -132,9 +132,26 @@ function setupLanguageSwitchers() {
 }
 
 async function getData() {
-    var result = await fetch('https://davidpaarup-api.vercel.app/api/list');
-    const data = await result.json();
-    return data.blobs.map(b => b.url);
+    const query = `*[_type == "drawing"]{
+        _id,
+        title,
+        "imageUrl": image.asset->url
+    }`;
+    
+    const encodedQuery = encodeURIComponent(query);
+    const url = `https://ghrdvna9.apicdn.sanity.io/v2023-05-03/data/query/production?query=${encodedQuery}`;
+    
+    try {
+        const result = await fetch(url);
+        if (!result.ok) {
+            throw new Error(`HTTP error! status: ${result.status}`);
+        }
+        const data = await result.json();
+        return data.result.map(drawing => drawing.imageUrl).filter(url => url);
+    } catch (error) {
+        console.error('Error fetching drawings from Sanity:', error);
+        return [];
+    }
 }
 
 function shuffleArray(array) {
