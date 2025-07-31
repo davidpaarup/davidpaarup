@@ -218,6 +218,7 @@ function observe(drawings) {
 
 function openModal(drawing) {
     const modal = document.getElementById('imageModal');
+    const modalContent = modal.querySelector('.modal-content');
     const modalImage = document.getElementById('modalImage');
     const modalTitle = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
@@ -229,6 +230,16 @@ function openModal(drawing) {
     modalDescription.textContent = drawing.description || '';
     modalFormat.textContent = drawing.format || '';
     modalAvailable.textContent = drawing.available ? 'Available' : 'Not available';
+    
+    modalImage.onload = function() {
+        const aspectRatio = this.naturalWidth / this.naturalHeight;
+        if (aspectRatio > 1.5) {
+            modalContent.classList.add('wide-image');
+        } else {
+            modalContent.classList.remove('wide-image');
+        }
+    };
+    
     modal.style.display = 'flex';
 }
 

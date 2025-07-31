@@ -342,3 +342,13 @@ a {
   opacity: 0.9;
   line-height: 1.5;
 }
+
+.modal-content.wide-image {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-content.wide-image .modal-info {
+  max-width: 90%;
+  text-align: center;
+}
