@@ -136,6 +136,7 @@ async function getData() {
         _id,
         title,
         description,
+        format,
         "imageUrl": image.asset->url
     }`;
     
@@ -219,10 +220,12 @@ function openModal(drawing) {
     const modalImage = document.getElementById('modalImage');
     const modalTitle = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
+    const modalFormat = document.getElementById('modalFormat');
     
     modalImage.src = drawing.imageUrl;
     modalTitle.textContent = drawing.title || '';
     modalDescription.textContent = drawing.description || '';
+    modalFormat.textContent = drawing.format || '';
     modal.style.display = 'flex';
 }
 
