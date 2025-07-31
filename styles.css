@@ -236,6 +236,16 @@ a {
   #languageSwitchers {
     justify-content: center;
   }
+  
+  .modal-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .modal-info {
+    max-width: 90%;
+    text-align: center;
+  }
 }
 
 .hidden {
@@ -276,6 +286,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2rem;
 }
 
 .image-wrapper {
@@ -310,4 +321,24 @@ a {
   font-weight: 300;
   margin: 0;
   font-size: 1.5rem;
+}
+
+.modal-info {
+  color: white;
+  text-align: left;
+  max-width: 300px;
+  flex-shrink: 0;
+}
+
+.modal-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.modal-info p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.5;
 }

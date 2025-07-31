@@ -135,6 +135,7 @@ async function getData() {
     const query = `*[_type == "drawing"]{
         _id,
         title,
+        description,
         "imageUrl": image.asset->url
     }`;
     
@@ -147,7 +148,7 @@ async function getData() {
             throw new Error(`HTTP error! status: ${result.status}`);
         }
         const data = await result.json();
-        return data.result.map(drawing => drawing.imageUrl).filter(url => url);
+        return data.result.filter(drawing => drawing.imageUrl);
     } catch (error) {
         console.error('Error fetching drawings from Sanity:', error);
         return [];
@@ -166,8 +167,8 @@ let imageObserver;
 let containers;
 
 async function displayDrawings() {
-    const urls = await getData();
-    const shuffledUrls = shuffleArray([...urls]);
+    const drawings = await getData();
+    const shuffledDrawings = shuffleArray([...drawings]);
     containers = document.getElementsByClassName('drawingContainer');
     
     imageObserver = new IntersectionObserver((entries, observer) => {
@@ -184,27 +185,27 @@ async function displayDrawings() {
     });
     
 
-    const firstImages = shuffledUrls.slice(0, 10);
+    const firstImages = shuffledDrawings.slice(0, 10);
     observe(firstImages);
 
     setTimeout(() => {
-        const restImages = shuffledUrls.slice(10);
+        const restImages = shuffledDrawings.slice(10);
         observe(restImages);
     }, 1000);
 }
 
-function observe(urls) {
-   urls.forEach((url, i) => {
+function observe(drawings) {
+   drawings.forEach((drawing, i) => {
         const a = document.createElement('a');
         a.className = 'drawingLink';
         a.style.cursor = 'pointer';
         a.addEventListener('click', (e) => {
             e.preventDefault();
-            openModal(url);
+            openModal(drawing);
         });
 
         const img = document.createElement('img');
-        img.dataset.src = url;
+        img.dataset.src = drawing.imageUrl;
         img.className = 'drawing';
         
         a.appendChild(img);
@@ -213,10 +214,15 @@ function observe(urls) {
     });
 }
 
-function openModal(imageUrl) {
+function openModal(drawing) {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
-    modalImage.src = imageUrl;
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    
+    modalImage.src = drawing.imageUrl;
+    modalTitle.textContent = drawing.title || '';
+    modalDescription.textContent = drawing.description || '';
     modal.style.display = 'flex';
 }
 
