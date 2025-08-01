@@ -22,11 +22,70 @@ let currentLanguage = sessionStorage.getItem('selectedLanguage') || 'english';
 let profileData = null;
 let showModalTextInfo = false;
 
-// Load profile data from API
+// Load profile data from Sanity
 async function loadProfileData() {
     try {
-        const response = await fetch('https://davidpaarup-api.vercel.app/api/data');
-        profileData = await response.json();
+        const query = `*[_type == "portfolio"]{
+            language,
+            "data": {
+                "name": name,
+                "description": description,
+                "experience": {
+                    "sectionTitle": experience.sectionTitle,
+                    "data": experience.data[]->{
+                        company,
+                        position,
+                        description,
+                        url,
+                        startYear,
+                        endYear,
+                        current,
+                        location,
+                        type
+                    }
+                },
+                "education": {
+                    "sectionTitle": education.sectionTitle,
+                    "data": education.data[]->{
+                        school,
+                        degree,
+                        startYear,
+                        endYear,
+                        location,
+                        type,
+                        description
+                    }
+                },
+                "projects": {
+                    "sectionTitle": projects.sectionTitle,
+                    "data": projects.data[]->{
+                        name,
+                        description,
+                        url,
+                        startYear,
+                        endYear,
+                        location,
+                        technologies,
+                        status
+                    }
+                },
+                "skills": skills,
+                "languages": languages,
+                "email": email,
+                "location": location,
+                "birthDate": birthDate
+            }
+        }`;
+        
+        const encodedQuery = encodeURIComponent(query);
+        const url = `https://ghrdvna9.apicdn.sanity.io/v2023-05-03/data/query/production?query=${encodedQuery}`;
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        profileData = data.result;
         updateContent(currentLanguage);
     } catch (error) {
         console.error('Error loading profile data:', error);
