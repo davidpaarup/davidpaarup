@@ -20,6 +20,7 @@ const menuTranslations = {
 
 let currentLanguage = sessionStorage.getItem('selectedLanguage') || 'english';
 let profileData = null;
+let showModalTextInfo = false;
 
 // Load profile data from API
 async function loadProfileData() {
@@ -220,6 +221,7 @@ function openModal(drawing) {
     const modal = document.getElementById('imageModal');
     const modalContent = modal.querySelector('.modal-content');
     const modalImage = document.getElementById('modalImage');
+    const modalInfo = modal.querySelector('.modal-info');
     const modalTitle = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
     const modalFormat = document.getElementById('modalFormat');
@@ -230,6 +232,13 @@ function openModal(drawing) {
     modalDescription.textContent = drawing.description || '';
     modalFormat.textContent = drawing.format || '';
     modalAvailable.textContent = drawing.available ? 'Available' : 'Not available';
+    
+    // Show or hide text information based on flag
+    if (showModalTextInfo) {
+        modalInfo.style.display = 'block';
+    } else {
+        modalInfo.style.display = 'none';
+    }
     
     modalImage.onload = function() {
         const aspectRatio = this.naturalWidth / this.naturalHeight;
