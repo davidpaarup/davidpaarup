@@ -249,10 +249,14 @@ function populateContent(language) {
     projectsContainer.innerHTML = data.projects.data.map(project => {
         let yearInfo = ''
         
-        if (project.startYear != null && project.location != null) {
-            yearInfo = ` ${project.location}; ${project.startYear}:`;
+        if (project.startYear != null) {
+            if (project.location != null) {
+                yearInfo = ` (${project.location}; ${project.startYear})`;
+            } else {
+                yearInfo = ` (${project.startYear})`;
+            }
         }
-        return `<p>- <span>${yearInfo} <a href="${project.url}">${project.name}</a> - ${project.description}</span></p>`;
+        return `<p>- <span><a href="${project.url}">${project.name}</a>${yearInfo} - ${project.description}</span></p>`;
     }).join('');
 
     // Update skills
