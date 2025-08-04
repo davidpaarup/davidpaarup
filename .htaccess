@@ -1,0 +1,23 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Redirect language pages to their respective folders
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Handle root directory - default to English
+DirectoryIndex index.html
+
+# Optional: Redirect based on browser language preference
+# Uncomment the lines below if you want automatic language detection
+# RewriteCond %{HTTP:Accept-Language} ^es [NC]
+# RewriteCond %{REQUEST_URI} ^/$
+# RewriteRule ^(.*)$ /es/ [R=302,L]
+
+# RewriteCond %{HTTP:Accept-Language} ^da [NC]
+# RewriteCond %{REQUEST_URI} ^/$
+# RewriteRule ^(.*)$ /da/ [R=302,L]
+
+# RewriteCond %{HTTP:Accept-Language} ^no [NC]
+# RewriteCond %{REQUEST_URI} ^/$
+# RewriteRule ^(.*)$ /no/ [R=302,L]

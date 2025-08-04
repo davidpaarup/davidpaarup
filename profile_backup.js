@@ -68,7 +68,6 @@ function setLoadingState(isLoading) {
 // Load data from Sanity
 async function loadProfileData() {
     setLoadingState(true);
-    
     try {
         const query = `*[_type == "portfolio"]{
             language,
@@ -94,24 +93,8 @@ async function loadProfileData() {
                     "data": education.data[]->{
                         school,
                         degree,
-                        description,
-                        url,
                         startYear,
                         endYear,
-                        location,
-                        type
-                    }
-                },
-                "experience": {
-                    "sectionTitle": experience.sectionTitle,
-                    "data": experience.data[]->{
-                        company,
-                        position,
-                        description,
-                        url,
-                        startYear,
-                        endYear,
-                        current,
                         location,
                         type,
                         description
@@ -153,6 +136,108 @@ async function loadProfileData() {
         console.error('Error loading profile data:', error);
         setLoadingState(false);
     }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    loadProfileData();
+    setupMobileMenu();
+}); 
+    
+    // Update basic info
+    document.getElementById('name').textContent = data.name.text;
+    document.getElementById('description').textContent = data.description.text;
+    
+    // Update experience
+
+    const experienceTitle = document.getElementById('experienceTitle');
+    experienceTitle.textContent = data.experience.sectionTitle;
+
+    const experienceContainer = document.getElementById('experience');
+    experienceContainer.innerHTML = data.experience.data.map(exp => {
+
+        let yearRange;
+
+        if (exp.current) {
+            yearRange = `${exp.startYear} - now`;
+        } else if (exp.startYear === exp.endYear) {
+            yearRange = exp.startYear;
+        } else {
+            yearRange = `${exp.startYear} - ${exp.endYear}`;
+        }
+
+        let type = '';
+
+        if (exp.type != null) {
+            type = `(${exp.type})`;
+        }
+
+        return `<p>- <span>${exp.position} - <a href="${exp.url}">${exp.company}</a> ${type} - ${exp.location}; ${yearRange}: ${exp.description}</span></p>`;
+    }).join('');
+    
+    // Update education
+    const educationTitle = document.getElementById('educationTitle');
+    educationTitle.textContent = data.education.sectionTitle;
+
+    const educationContainer = document.getElementById('education');
+    educationContainer.innerHTML = data.education.data.map(edu => {
+        const yearRange = `${edu.startYear} - ${edu.endYear}`;
+        return `<p>- <span>${edu.degree} - <a href="https://www.uam.es">${edu.school}</a> (${edu.type}) - ${edu.location}; ${yearRange}: ${edu.description}</span></p>`;
+    }).join('');
+    
+    // Update projects
+    const projectsTitle = document.getElementById('projectsTitle');
+    projectsTitle.textContent = data.projects.sectionTitle;
+
+    const projectsContainer = document.getElementById('projects');
+    projectsContainer.innerHTML = data.projects.data.map(project => {
+        let yearInfo = ''
+        
+        if (project.startYear != null) {
+            if (project.location != null) {
+                yearInfo = ` (${project.location}; ${project.startYear})`;
+            } else {
+                yearInfo = ` (${project.startYear})`;
+            }
+        }
+        return `<p>- <span><a href="${project.url}">${project.name}</a>${yearInfo} - ${project.description}</span></p>`;
+    }).join('');
+
+    // Update skills
+    const skillsTitle = document.getElementById('skillsTitle');
+    skillsTitle.textContent = data.skills.sectionTitle;
+    
+    document.getElementById('skills').textContent = getJoined(data.skills.data); 
+    
+    // Update languages
+    const languagesTitle = document.getElementById('languagesTitle');
+    languagesTitle.textContent = data.languages.sectionTitle;
+
+    let joinedLanguages = getJoined(data.languages.data);
+
+    if (!data.languages.capitalize) {
+        joinedLanguages = joinedLanguages.charAt(0).toUpperCase() + joinedLanguages.slice(1).toLowerCase();
+    }
+
+    document.getElementById('languages').textContent = joinedLanguages;
+    
+    // Update contact info
+    const contactTitle = document.getElementById('contactTitle');
+    contactTitle.textContent = data.email.sectionTitle;
+
+    const emailLink = document.getElementById('email');
+    emailLink.href = `mailto:${data.email.text}`;
+    emailLink.textContent = data.email.text;
+
+    const locationTitle = document.getElementById('locationTitle');
+    locationTitle.textContent = data.location.sectionTitle;
+
+    document.getElementById('location').textContent = data.location.text;
+    
+    const birthDateTitle = document.getElementById('birthDateTitle');
+    birthDateTitle.textContent = data.birthDate.sectionTitle;
+
+    document.getElementById('birthDate').textContent = data.birthDate.text;
 }
 
 // Update menu translations
@@ -275,8 +360,6 @@ function populateContent(language) {
     
     const birthDateTitle = document.getElementById('birthDateTitle');
     birthDateTitle.textContent = data.birthDate.sectionTitle;
-
-    document.getElementById('birthDate').textContent = data.birthDate.text;
 }
 
 function getJoined(elements) {

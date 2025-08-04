@@ -18,7 +18,7 @@ const menuTranslations = {
     }
 };
 
-let currentLanguage = sessionStorage.getItem('selectedLanguage') || 'english';
+let currentLanguage = window.pageLanguage || 'english';
 let profileData = null;
 let showModalTextInfo = false;
 
@@ -138,56 +138,6 @@ function updateMenuTranslations(language) {
     
     if (drawingsLink) {
         drawingsLink.textContent = translations.drawings;
-    }
-}
-
-// Function to switch language
-function switchLanguage(language) {
-    currentLanguage = language;
-    sessionStorage.setItem('selectedLanguage', language);
-    updateContent(language);
-    
-    // Remove active class from all language icons
-    const allLanguageIcons = document.querySelectorAll('.language-icon');
-    allLanguageIcons.forEach(icon => icon.classList.remove('active'));
-    
-    // Add active class to the clicked language icon
-    const activeIcon = document.querySelector(`img[src="icons/${language}.png"]`);
-    if (activeIcon) {
-        activeIcon.classList.add('active');
-    }
-}
-
-// Setup language switcher event listeners
-function setupLanguageSwitchers() {
-    const englishIcon = document.querySelector('img[src="icons/english.png"]');
-    const spanishIcon = document.querySelector('img[src="icons/spanish.png"]');
-    const danishIcon = document.querySelector('img[src="icons/danish.png"]');
-    const norwegianIcon = document.querySelector('img[src="icons/norwegian.png"]');
-    
-    // Set correct active icon based on current language
-    const allLanguageIcons = document.querySelectorAll('.language-icon');
-    allLanguageIcons.forEach(icon => icon.classList.remove('active'));
-    
-    const activeIcon = document.querySelector(`img[src="icons/${currentLanguage}.png"]`);
-    if (activeIcon) {
-        activeIcon.classList.add('active');
-    }
-    
-    if (englishIcon) {
-        englishIcon.addEventListener('click', () => switchLanguage('english'));
-    }
-    
-    if (spanishIcon) {
-        spanishIcon.addEventListener('click', () => switchLanguage('spanish'));
-    }
-
-    if (danishIcon) {
-        danishIcon.addEventListener('click', () => switchLanguage('danish'));
-    }
-
-    if (norwegianIcon) {
-        norwegianIcon.addEventListener('click', () => switchLanguage('norwegian'));
     }
 }
 
@@ -341,9 +291,6 @@ function setupMobileMenu() {
 document.addEventListener('DOMContentLoaded', () => {
     // Load profile data and apply translations
     loadProfileData();
-    
-    // Setup language switcher functionality
-    setupLanguageSwitchers();
     
     // Setup mobile menu functionality
     setupMobileMenu();
