@@ -206,8 +206,22 @@ async function displayDrawings() {
     }, 1000);
 }
 
+function getVisibleContainers() {
+    const visibleContainers = [];
+    for (let i = 0; i < containers.length; i++) {
+        const container = containers[i];
+        const computedStyle = window.getComputedStyle(container);
+        if (computedStyle.display !== 'none') {
+            visibleContainers.push(container);
+        }
+    }
+    return visibleContainers;
+}
+
 function observe(drawings) {
-   drawings.forEach((drawing, i) => {
+    const visibleContainers = getVisibleContainers();
+
+    drawings.forEach((drawing, i) => {
         const a = document.createElement('a');
         a.className = 'drawingLink';
         a.style.cursor = 'pointer';
@@ -219,9 +233,9 @@ function observe(drawings) {
         const img = document.createElement('img');
         img.dataset.src = drawing.imageUrl;
         img.className = 'drawing';
-        
+
         a.appendChild(img);
-        containers[i % containers.length].appendChild(a);
+        visibleContainers[i % visibleContainers.length].appendChild(a);
         imageObserver.observe(img);
     });
 }
