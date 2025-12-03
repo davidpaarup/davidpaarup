@@ -1,0 +1,40 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-ip-country",
+          "value": "DK"
+        }
+      ],
+      "destination": "/dk",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-ip-country",
+          "value": "NO"
+        }
+      ],
+      "destination": "/no",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-ip-country",
+          "value": "ES"
+        }
+      ],
+      "destination": "/es",
+      "permanent": false
+    }
+  ]
+}
