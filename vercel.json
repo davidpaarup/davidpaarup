@@ -9,7 +9,7 @@
           "value": "DK"
         }
       ],
-      "destination": "/da",
+      "destination": "/da/index.html",
       "permanent": false
     },
     {
@@ -21,7 +21,7 @@
           "value": "NO"
         }
       ],
-      "destination": "/no",
+      "destination": "/no/index.html",
       "permanent": false
     },
     {
@@ -33,7 +33,7 @@
           "value": "ES"
         }
       ],
-      "destination": "/es",
+      "destination": "/es/index.html",
       "permanent": false
     }
   ]
