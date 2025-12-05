@@ -324,4 +324,12 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    // Add click handler to name element
+    const nameElement = document.getElementById('name');
+    if (nameElement) {
+        nameElement.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    }
 });

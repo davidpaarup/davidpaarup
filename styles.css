@@ -570,3 +570,7 @@ a {
   max-width: 90%;
   text-align: center;
 }
+
+#name {
+  cursor: pointer;
+}
